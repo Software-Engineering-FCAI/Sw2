@@ -25,9 +25,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','admin',
     ];
 
+    public function isAdmin() 
+    {
+        return $this->admin;
+    }
+
+    public function orders()
+    {
+        //user one has many  orders
+        return $this->hasMany(Order_model::class,'user_id');
+    }
     /**
      * The attributes that should be cast to native types.
      *
